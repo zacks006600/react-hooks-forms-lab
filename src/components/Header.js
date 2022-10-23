@@ -1,14 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 
-function Header({ isDarkMode, onDarkModeClick }) {
+function Item({ name, category }) {
+  const [isInCart, setIsInCart] = useState(false);
+
+  function handleAddToCartClick() {
+    setIsInCart((isInCart) => !isInCart);
+  }
+
   return (
-    <header>
-      <h2>Shopster</h2>
-      <button onClick={onDarkModeClick}>
-        {isDarkMode ? "Dark" : "Light"} Mode
+    <li className={isInCart ? "in-cart" : ""}>
+      <span>{name}</span>
+      <span className="category">{category}</span>
+      <button
+        className={isInCart ? "remove" : "add"}
+        onClick={handleAddToCartClick}
+      >
+        {isInCart ? "Remove From" : "Add to"} Cart
       </button>
-    </header>
+    </li>
   );
 }
 
-export default Header;
+export default Item;
